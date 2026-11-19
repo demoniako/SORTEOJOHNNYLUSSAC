@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#100e24">
+<meta name="description" content="Ruleta cinematográfica de 138 participantes para el evento GTA VI de JohnnyLussac en Twitch.">
+<title>GTA VI · Ruleta del sorteo | JohnnyLussac</title>
+<style>
+  :root{color-scheme:dark;--bg:#100d21;--panel:#181630dd;--panel2:#15142add;--pink:#ff63b7;--hot:#ff3e9e;--purple:#9d79ff;--cyan:#69edff;--gold:#ffdb87;--txt:#fcf5ff;--muted:#aca7c8;--line:#ffffff26}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;min-height:100vh;background:#100d21;color:var(--txt);font-family:Inter,Segoe UI,Arial,sans-serif;overflow-x:hidden}
+  button,textarea,input{font:inherit}
+  button{cursor:pointer}
+  .background{position:fixed;z-index:-2;inset:0;background:radial-gradient(ellipse 55% 52% at 75% 18%,#e64a8870,transparent 70%),radial-gradient(ellipse 62% 40% at 12% 72%,#534acd60,transparent 75%),linear-gradient(145deg,#0c1025 0%,#211638 49%,#0d1224 100%);overflow:hidden}
+  .background:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 65px,#ffffff07 66px 67px),repeating-linear-gradient(90deg,transparent 0 65px,#ffffff05 66px 67px);mask-image:linear-gradient(0deg,#0004,transparent 65%)}
+  .skyline{position:absolute;bottom:-2px;left:0;width:100%;height:33vh;min-height:210px;opacity:.44}
+  .glow-orb{position:absolute;top:8%;right:5%;width:min(42vw,520px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#ffbdad66 0 22%,#ff4cba26 50%,transparent 70%);filter:blur(12px)}
+  .shell{width:min(1590px,calc(100% - 58px));margin:auto}
+  header{height:90px;display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid #ffffff16;position:relative;z-index:4}
+  .brand{display:flex;align-items:center;gap:15px;min-width:0}
+  .brand-mark{font:900 34px/.9 Impact,'Arial Black',sans-serif;color:#fff;letter-spacing:-3px;text-shadow:2px 2px 0 #ff3e9e,-2px -1px 0 #7c67ed}
+  .brand-copy strong{display:block;font-size:15px;font-weight:900;letter-spacing:2.5px}
+  .brand-copy small{display:block;color:#c1b8d5;font-size:11px;letter-spacing:2px;margin-top:4px}
+  .top-right{display:flex;align-items:center;gap:14px}
+  .tag{border:1px solid #ffffff35;border-radius:999px;padding:9px 13px;font-size:10px;font-weight:900;letter-spacing:1.25px;text-transform:uppercase;white-space:nowrap;background:#18122cbb}
+  .tag.preset{border-color:#ffca7880;color:#ffe1a6;background:#b8682426}
+  .tag.random{border-color:#75ffe270;color:#83ffdc;background:#227b6b29}
+  .twitch{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;border:1px solid #a888ff6b;background:#8b58dd38;border-radius:12px;padding:11px 16px;font-weight:800;font-size:13px;transition:.2s}
+  .twitch:hover{background:#9158f486;transform:translateY(-2px)}
+  .twitch svg{width:17px;height:17px;fill:#dec7ff}
+  .hero{padding-top:29px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+  .eyebrow{display:flex;align-items:center;gap:10px;letter-spacing:4px;color:var(--cyan);font-size:10px;font-weight:900;text-transform:uppercase}
+  .eyebrow:before{content:"";width:21px;height:2px;background:var(--cyan)}
+  h1{font:900 clamp(43px,6vw,88px)/.9 Impact,'Arial Black',sans-serif;letter-spacing:.1px;text-transform:uppercase;margin:13px 0 5px;text-shadow:0 4px 32px #df28855e}
+  h1 .gta{color:#fff}h1 .six{color:#ffa6d3;text-shadow:2px 2px 0 #7c4de7,0 0 42px #ff5ca6}
+  .sub{margin:10px 0 0;color:#d4cde2;font-size:14px;letter-spacing:.7px}
+  .hero-stats{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end;padding-bottom:10px}
+  .stat{padding:13px 15px;border:1px solid var(--line);background:#15122b8a;border-radius:15px;min-width:117px;backdrop-filter:blur(20px)}
+  .stat strong{display:block;font-size:25px;font-weight:950;line-height:1;font-variant-numeric:tabular-nums}
+  .stat span{display:block;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#c9bad6;margin-top:7px;font-weight:800}
+  .layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(330px,.79fr);gap:23px;align-items:stretch;margin-top:24px}
+  .wheel-card{position:relative;border:1px solid #e59bff30;background:linear-gradient(140deg,#2e1b4b70,#0f1022db 54%,#1d1e42a1);border-radius:27px;min-width:0;min-height:710px;box-shadow:inset 0 1px #ffffff26,0 25px 80px #04000f70;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .wheel-card:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,#ff75c018,transparent 57%);pointer-events:none}
+  .card-caption{position:absolute;top:21px;left:26px;right:26px;display:flex;justify-content:space-between;align-items:center;gap:10px;z-index:3;font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#e5d4ef}
+  .card-caption .dot{display:inline-block;background:#ff79b9;box-shadow:0 0 13px #ff4cba;width:8px;height:8px;border-radius:50%;margin-right:7px}
+  .zoom{background:#ffffff13;color:white;border:1px solid #ffffff3e;border-radius:9px;padding:9px 11px;white-space:nowrap;font-size:11px;font-weight:800;letter-spacing:.4px}
+  .zoom:hover{background:#ffffff2c}
+  .wheel-wrap{width:min(93%,750px);aspect-ratio:1;position:relative;margin:62px auto 82px;flex-shrink:0;filter:drop-shadow(0 20px 32px #03000b70)}
+  .wheel-rim{position:absolute;inset:-15px;border:2px solid #ffffff57;border-radius:50%;box-shadow:0 0 0 8px #ba63ce19,0 0 0 10px #c988f43a,0 0 30px #d765ed8c,inset 0 0 16px #f9a9ff66;pointer-events:none}
+  .wheel-rim:after{content:"";position:absolute;inset:5px;border:1px dashed #f5c4ff77;border-radius:50%}
+  #wheelCanvas{display:block;width:100%;height:100%;border-radius:50%;background:#20143e;will-change:transform;box-shadow:0 0 0 3px #fff4}
+  .pointer{position:absolute;top:-33px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:19px solid transparent;border-right:19px solid transparent;border-top:40px solid #fff3db;z-index:5;filter:drop-shadow(0 0 8px #ffb64c) drop-shadow(0 2px 0 #c94c9c)}
+  .pointer:before{content:"";position:absolute;left:-5px;top:-41px;width:10px;height:14px;background:#fff2d2;border-radius:4px}
+  .center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:133px;aspect-ratio:1;border-radius:50%;z-index:2;border:7px solid #fde1f0;background:radial-gradient(circle at 34% 26%,#fcaac9 0%,#f66ca8 37%,#a345aa 75%,#4b327b 100%);display:grid;place-items:center;box-shadow:0 7px 20px #1d093fcc,0 0 0 5px #b754b6a8,inset 0 0 12px #ffffff88}
+  .center div{text-align:center;font:900 51px/.86 Impact,'Arial Black',sans-serif;color:white;text-shadow:2px 3px 0 #692976;letter-spacing:-2px}
+  .center span{font:900 11px/1 Arial,sans-serif;display:block;letter-spacing:2px;margin-top:9px}
+  .wheel-footer{position:absolute;bottom:17px;left:24px;right:24px;z-index:3;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .wheel-footer>div{min-width:0}
+  .label-mini{display:block;font-size:9px;color:#9f98bc;font-weight:900;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:5px}
+  #activeName{font-size:20px;font-weight:900;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:400px;color:#fff}
+  .progress-meta{text-align:right}
+  #elapsed{font-size:17px;font-weight:900;font-variant-numeric:tabular-nums}
+  .progress-track{position:absolute;bottom:0;left:0;right:0;height:4px;background:#ffffff1a}
+  #progressFill{width:0;height:100%;background:linear-gradient(90deg,var(--cyan),var(--pink),var(--gold));box-shadow:0 0 10px var(--pink);transition:none}
+  .side{display:flex;flex-direction:column;gap:18px;min-width:0}
+  .panel{border:1px solid #ffffff28;background:linear-gradient(145deg,#2a1f47e6,#17142dde);border-radius:24px;padding:25px;backdrop-filter:blur(14px);box-shadow:inset 0 1px #ffffff1b,0 15px 50px #0002}
+  .panel h2{font:900 25px/1 Impact,'Arial Black',sans-serif;text-transform:uppercase;letter-spacing:.6px;margin:0 0 10px}
+  .panel p{font-size:12px;line-height:1.6;color:#b5b0cc;margin:0}
+  .rule{height:1px;background:#ffffff1d;margin:21px 0}
+  .current-title{font-size:10px;color:#dfb7ef;letter-spacing:2.2px;text-transform:uppercase;font-weight:900}
+  .featured{min-height:93px;display:flex;align-items:center;gap:12px;min-width:0;padding-top:11px}
+  .featured-number{font:900 49px/.9 Impact,'Arial Black',sans-serif;color:#ffffff55;flex-shrink:0}
+  .featured-name{font-size:clamp(22px,2.15vw,30px);line-height:1.03;font-weight:950;overflow-wrap:anywhere;color:white}
+  .form-label{display:flex;justify-content:space-between;gap:6px;margin:0 0 12px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:900;color:#e8d6f5}
+  .form-label span:last-child{color:#aea0c6}
+  .range{width:100%;accent-color:var(--pink)}
+  .range-ticks{display:flex;justify-content:space-between;color:#968aa8;font-size:10px;margin-top:3px}
+  .primary{display:block;width:100%;border:0;border-radius:15px;padding:18px 13px;margin-top:18px;color:#1a1028;font-weight:1000;text-transform:uppercase;letter-spacing:1.3px;background:linear-gradient(110deg,#fff0ac,#ff7ebe 47%,#b38bff);box-shadow:0 6px 0 #9a396f,0 15px 35px #ff54a042;transition:transform .16s,filter .16s}
+  .primary:hover:not(:disabled){filter:brightness(1.1);transform:translateY(-2px)}
+  .primary:active:not(:disabled){transform:translateY(3px);box-shadow:0 3px 0 #9a396f}
+  button:disabled{opacity:.42;cursor:not-allowed}
+  .secondary-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+  .secondary{border:1px solid #ffffff2b;border-radius:12px;background:#ffffff0c;color:#fff;padding:12px 9px;font-size:11px;font-weight:900;letter-spacing:.4px}
+  .secondary:hover{background:#ffffff20}
+  .notice{padding:14px;border:1px solid #ffd09350;background:#aa6d2630;border-radius:13px;color:#ffe1a5;font-size:11px;line-height:1.55;margin-top:20px}
+  .notice strong{display:block;margin-bottom:4px;font-size:11px;letter-spacing:.5px}
+  .notice.random{border-color:#7af9d75e;background:#226b6430;color:#abffe9}
+  .list-panel{margin:21px 0 55px;padding:25px;border:1px solid #ffffff25;border-radius:22px;background:#120f25db;backdrop-filter:blur(18px)}
+  .list-head{display:flex;gap:20px;justify-content:space-between;align-items:center;margin-bottom:21px;flex-wrap:wrap}
+  .list-head h2{font:900 26px/1 Impact,'Arial Black',sans-serif;margin:0 0 5px;text-transform:uppercase}
+  .list-head p{font-size:12px;color:#a9a2ba;margin:0}
+  .tools{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+  .tools input{background:#ffffff0b;color:white;border:1px solid #ffffff2b;border-radius:11px;padding:12px 13px;min-width:200px;outline:none}
+  .tools input:focus,.editor textarea:focus{border-color:#ec88d5;box-shadow:0 0 0 3px #d85a9830}
+  .tools button{padding:12px 15px;background:#ffffff14;border:1px solid #ffffff28;color:#fff;border-radius:11px;font-size:12px;font-weight:850}
+  .participant-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;max-height:245px;overflow:auto;padding-right:6px;scrollbar-color:#9765b8 transparent}
+  .participant{display:flex;align-items:center;min-width:0;gap:9px;border:1px solid #ffffff11;background:#ffffff07;border-radius:10px;padding:10px 8px;font-size:12px}
+  .participant .num{font-size:10px;color:#fc88c3;font-weight:800;font-variant-numeric:tabular-nums}
+  .participant .name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#e5deea}
+  .participant.active{border-color:#ffb9deaf;background:#e859b02c}
+  .editor{display:none;margin-top:25px;padding-top:21px;border-top:1px solid #ffffff25}
+  .editor.open{display:block}
+  .editor>p{font-size:12px;color:#c2bad4;line-height:1.6}
+  .editor textarea{width:100%;height:180px;resize:vertical;background:#0c0d1a;color:#fff;border:1px solid #ffffff35;border-radius:12px;padding:13px;outline:none;line-height:1.5;font-family:ui-monospace,Consolas,monospace;font-size:12px;margin-top:10px}
+  .editor-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:11px}
+  .editor-actions button,.editor-actions label{border:1px solid #ffffff3d;background:#7251a6;color:#fff;border-radius:10px;padding:11px 16px;font-weight:850;font-size:11px;cursor:pointer}
+  .editor-actions label{background:#ffffff15}
+  .editor-actions input{display:none}
+  #editorMessage{font-size:12px;color:#c5d7eb}
+  footer{color:#b7aacc;text-align:center;padding:0 0 35px;font-size:11px;line-height:1.6}
+  footer a{color:#f9adcb;text-decoration:none}
+  .modal{display:none;position:fixed;inset:0;z-index:40;background:#090817e9;backdrop-filter:blur(17px);justify-content:center;align-items:center;padding:24px}
+  .modal.show{display:flex}
+  .winner-card{position:relative;max-width:690px;width:100%;padding:45px 26px;text-align:center;border:1px solid #ffc5e798;border-radius:28px;box-shadow:0 0 0 7px #f84eae13,0 30px 130px #e440aa3d;background:radial-gradient(circle at 50% 10%,#713b8db5,#23143b 61%,#17122c)}
+  .winner-card:before,.winner-card:after{content:"✦";position:absolute;top:40px;font-size:49px;color:#ffe1a5;text-shadow:0 0 20px #ff68bb}
+  .winner-card:before{left:40px}.winner-card:after{right:40px}
+  .winner-title{color:#fff5ba;font-weight:900;letter-spacing:4px;font-size:12px}
+  .winner-card h2{font:900 clamp(48px,7vw,90px)/.94 Impact,'Arial Black',sans-serif;letter-spacing:.4px;text-transform:uppercase;margin:15px 0;color:#fff;text-shadow:4px 5px #e847a7,0 0 36px #da49b4}
+  #winnerName{font-size:clamp(26px,4vw,46px);font-weight:1000;word-break:break-word;color:#ffe4a6;margin:18px 0 9px}
+  #winnerMode{color:#c9bbd5;font-size:13px}
+  .winner-actions{display:flex;justify-content:center;gap:12px;margin-top:32px;flex-wrap:wrap}
+  .winner-actions button{border:1px solid #ffffff66;border-radius:13px;background:#ffffff20;padding:13px 19px;color:#fff;font-weight:900}
+  .winner-actions .again{background:#ff82bc;color:#24112e}
+  #confetti{position:fixed;inset:0;z-index:-1;pointer-events:none}
+  .flash{animation:flash .5s linear 2}
+  @keyframes flash{50%{filter:brightness(1.8)}}
+  body.fullscreen-wheel .shell header,body.fullscreen-wheel .hero,body.fullscreen-wheel .side,body.fullscreen-wheel .list-panel,body.fullscreen-wheel footer{display:none}
+  body.fullscreen-wheel .layout{display:block;margin:0}
+  body.fullscreen-wheel .wheel-card{height:100dvh;border-radius:0;min-height:0}
+  body.fullscreen-wheel .wheel-wrap{width:min(78vh,83vw,1000px);margin:38px auto 35px}
+  body.fullscreen-wheel .card-caption{top:15px}
+  body.fullscreen-wheel .wheel-footer{bottom:20px}
+  @media (max-width:1150px){.layout{grid-template-columns:minmax(0,1.15fr) minmax(310px,.8fr)}.wheel-card{min-height:600px}.wheel-wrap{width:min(93%,670px);margin:50px auto 85px}.center{width:110px}.center div{font-size:42px}.participant-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+  @media (max-width:900px){.shell{width:min(780px,calc(100% - 32px))}.layout{grid-template-columns:1fr}.wheel-card{min-height:0}.wheel-wrap{width:min(86%,680px);margin:65px auto 98px}.side{display:grid;grid-template-columns:1fr 1fr;gap:14px}.panel{padding:22px}.hero-stats{display:none}}
+  @media (max-width:600px){header{height:74px}.brand-mark{font-size:29px}.brand-copy strong{font-size:12px}.brand-copy small{font-size:9px}.top-right .tag{display:none}.twitch{font-size:11px;padding:9px}.twitch svg{display:none}.hero{padding-top:23px}h1{font-size:clamp(41px,11vw,70px)}.sub{font-size:12px}.layout{margin-top:20px}.wheel-card{border-radius:19px}.card-caption{left:15px;right:15px;top:15px;font-size:9px}.wheel-wrap{width:calc(100% - 45px);margin:69px auto 100px}.pointer{top:-25px;border-left-width:13px;border-right-width:13px;border-top-width:30px}.center{width:77px;border-width:4px}.center div{font-size:29px}.center span{font-size:8px;margin-top:3px}.wheel-footer{left:16px;right:16px;bottom:15px}#activeName{font-size:14px;max-width:220px}#elapsed{font-size:12px}.side{grid-template-columns:1fr}.panel{padding:19px}.participant-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.list-panel{padding:17px}.tools{width:100%}.tools input{flex:1;min-width:120px}.winner-card:before{left:12px}.winner-card:after{right:12px}}
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Evento cerrado: listado fijo y único control para iniciar un giro. */
+.participant-grid{max-height:none;overflow:visible;padding-right:0}
+.participant{padding:10px 12px;justify-content:flex-start}
+.participant .name{white-space:normal;overflow-wrap:anywhere;line-height:1.35}
+.side{justify-content:center}
+.side .panel{padding:32px}
+.side .primary{padding:22px 14px;font-size:16px;margin-top:26px}
+.side .featured{min-height:100px}
+.fixed-duration{font-size:42px;font-weight:950;line-height:1.08;letter-spacing:1px;font-variant-numeric:tabular-nums;color:#ffe4b5;text-shadow:0 0 18px #ff65b351}
+.event-info{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px}
+.event-info small{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#bcb0ce;font-weight:850}
+.programmed-reveal{border-top:1px solid #ffd09340;margin-top:18px;padding-top:18px;color:#ffe1a5;line-height:1.6;font-size:12px}
+.programmed-reveal strong{display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:1.25px;font-size:11px}
+.below-prompt{display:block;color:#b8add1;font-size:13px;margin-top:17px;text-align:center}
+.winner-card{cursor:pointer}
+.winner-card:hover{box-shadow:0 0 0 8px #f84eae18,0 30px 130px #e440aa5b}
+@media(max-width:900px){.side{display:block}.side .panel{padding:25px}}
+@media(max-width:600px){.side .panel{padding:21px}.participant-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.participant{padding:9px}}
+
+</style>
+</head>
+<body>
+<div class="background" aria-hidden="true">
+  <div class="glow-orb"></div>
+  <svg class="skyline" viewBox="0 0 1600 350" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="city" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7f326b"/><stop offset="1" stop-color="#15102e"/></linearGradient></defs>
+    <path fill="url(#city)" d="M0 210h90v-65h22v65h40V95h75v115h35v-35h45v35h28V74h76v136h26v-85h34v85h65V40h92v170h23v-55h47v55h39V90h72v120h38V35h24v175h54V120h62v90h30v-62h54v62h43V75h80v135h21v-45h78v45h32V110h83v100h30v-65h57v65h28V65h100v145h22V90h67v120h35V130h80v80h85v140H0Z"/>
+    <g fill="#1a102e"><path d="M0 276h1600v74H0z"/><path d="M80 350V90h9v260zm9-247-9-32-75-18 71 35-62-68 69 53 4-73 5 71 69-48-59 64 87-6-94 28z"/><path d="M1476 350V75h10v275zm5-268-5-34-87-18 79 38-69-78 78 64 5-54 9 63 79-45-72 61 95-9-105 29z"/></g>
+  </svg>
+</div>
+<div class="shell">
+<header>
+  <div class="brand"><div class="brand-mark">VI</div><div class="brand-copy"><strong>JOHNNYLUSSAC</strong><small>TWITCH EVENT</small></div></div>
+  <div class="top-right"><span class="tag preset"> · PROGRAMACIÓN BY IDATIA</span><a class="twitch" href="https://www.twitch.tv/johnnylussac" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 2-2 5v15h6v-3h4l3 3h4l3-3V2H4zm16 16-4 4h-4l-3-3H6V4h14v14zM11 7h2v6h-2zm5 0h2v6h-2z"/></svg> Twitch / JohnnyLussac</a></div>
+</header>
+<section class="hero">
+  <div><div class="eyebrow">Vice City Vibes · Evento de la comunidad para ganar el juego gta vi en ps5!</div><h1><span class="gta">Grand Theft Auto</span> <span class="six">VI</span></h1><p class="sub">LA RULETA DEL DESTINO · JOHNNYLUSSAC EN TWITCH</p></div>
+  <div class="hero-stats"><div class="stat"><strong>138</strong><span>Participantes</span></div><div class="stat"><strong>60s</strong><span>Tiempo de giro</span></div><div class="stat"><strong>01</strong><span>Resultado</span></div></div>
+</section>
+<main class="layout">
+  <section class="wheel-card" aria-label="Ruleta de los 138 nombres">
+    <div class="card-caption"><span><span class="dot"></span> LA GRAN RULETA DE VICE CITY</span><span class="tag preset">¡SUERTE!</span></div>
+    <div class="wheel-wrap"><div class="wheel-rim"></div><canvas id="wheelCanvas" width="1100" height="1100" role="img" aria-label="Ruleta de 138 participantes, con sus nombres alrededor de la rueda"></canvas><div class="pointer" aria-hidden="true"></div><div class="center" aria-hidden="true"><div>VI<span>LUCKY SPIN</span></div></div></div>
+    <div class="wheel-footer"><div><span class="label-mini">En el marcador</span><div id="activeName" aria-live="off">—</div></div><div class="progress-meta"><span class="label-mini">Tiempo restante</span><div id="elapsed">01:00</div></div></div><div class="progress-track"><div id="progressFill"></div></div>
+  </section>
+  <aside class="side">
+    <section class="panel">
+      <h2>La suerte está echada</h2><p>EL GANADOR RECIBIRÁ EL JUEGO GTA VI PARA PS5!</p>
+      <div class="rule"></div><div class="current-title">Nombre señalado</div>
+      <div class="featured"><span class="featured-name" id="featuredName">—</span></div>
+      <div class="event-info"><small>Duración fija</small><span class="fixed-duration">01:00</span></div>
+      <button class="primary" id="spinBtn" type="button">✦ GIRAR LA RULETA</button>
+      <span id="statusText" class="below-prompt" role="status">Listo para girar. Puedes repetir las veces que quieras.</span>
+      <div class="programmed-reveal"><strong></strong> <b>EL GANADOR</b>. CONSIGUE UNA CLAVE DE GTA VI PS5!</div>
+    </section>
+  </aside>
+</main>
+<section class="list-panel" id="participantsSection">
+  <div class="list-head"><div><h2>Los 138 participantes</h2><p>Lista fija, íntegra y de solo lectura. Ningún nombre se puede editar desde esta página.</p></div></div>
+  <div class="participant-grid" id="participantsGrid"></div>
+</section>
+<footer>Demoniako Desings <a href="https://www.twitch.tv/johnnylussac" target="_blank" rel="noopener noreferrer">twitch.tv/johnnylussac</a></footer>
+</div>
+<div class="modal" id="winnerModal" role="dialog" aria-modal="true" aria-labelledby="winnerTitle" aria-hidden="true"><canvas id="confetti"></canvas><div class="winner-card"><div class="winner-title">JOHNNYLUSSAC · GTA VI EVENT</div><h2 id="winnerTitle">¡RESULTADO!</h2><div id="winnerName">Rockyfer</div><div id="winnerMode">HA SIDO EL GANADOR DEL CODIGO DEL GTA VI PS5! </div><p style="color:#c8b8d8;font-size:12px;margin-top:32px">Haz clic para volver a la ruleta y girar otra vez</p></div></div>
+<script>
+'use strict';
+/* Resultado programado de demostración. Este modo se anuncia claramente
+   en la propia web: NO es un sorteo aleatorio. */
+const PARTICIPANTES = [
+  "privatethepenguin7",
+  "capelas19",
+  "criiistiiaanlp",
+  "david1310nr",
+  "anni257ewe",
+  "Kaxxont",
+  "aaaaaaaaaadsavfgdgfha",
+  "fabiofigo109",
+  "akatoly_",
+  "KenverinoVamos",
+  "ashleymelx",
+  "azlovesdbook",
+  "sequeira1876",
+  "cybervityaz",
+  "ZiNiCo",
+  "psyko132",
+  "david_02222222",
+  "idenn_x",
+  "Vaxyplay",
+  "kowalsky2134",
+  "jj_gamer175",
+  "mc_adrianrp_17",
+  "ByDermun",
+  "itsfaze05",
+  "junaacab68",
+  "valenabbona",
+  "falag_chz",
+  "ZetaxVaLenciaNo",
+  "mazorgod113",
+  "elpowerking",
+  "peogitano8",
+  "modpro78",
+  "yanohayscreamersenlatv",
+  "cazzzgtavi",
+  "AlejoKingXD",
+  "gat_jonyy",
+  "tupapuchoinosuke",
+  "manujjjjjj",
+  "Lucraack",
+  "RandyCanastera",
+  "sasha_darkotica",
+  "joujouxdd",
+  "pedrosanchezverin",
+  "claudioo_975",
+  "OTROITEIRO",
+  "borja29111",
+  "KevinVF7",
+  "AleRodiii",
+  "rpardosofi",
+  "hugorp6",
+  "alxearnednewt",
+  "joshua5218",
+  "ljh_games",
+  "pixelpluschannel2",
+  "Tatsuya_S_Drakensang",
+  "honter4242",
+  "melaencontreperdida",
+  "alann7",
+  "davidvgverin",
+  "demoniako01",
+  "prietobrais28",
+  "free_pakeles",
+  "bexvetoiy",
+  "crewbie3",
+  "el_choppa88",
+  "edenilson_dead",
+  "gallegomarginado",
+  "johnnykiussac",
+  "weeeedkhalifa",
+  "spookymop0",
+  "leandrogadobasto",
+  "kumzzy1",
+  "ismabarreira",
+  "gallego0fer",
+  "lvanovich_12",
+  "hypnosisborja",
+  "aaronkinnunen1",
+  "hdkdhfldhdmdjvdl",
+  "lilruff37",
+  "leanderrr___",
+  "cirilo1167",
+  "yeyo_38_",
+  "lpzcriss",
+  "TwistedVampire18",
+  "braismbp",
+  "13mbp",
+  "JoseCiriloRuizJimenez",
+  "davidar957",
+  "david_boxed",
+  "xaadee_",
+  "Lui_Del_Abismo",
+  "jamessbond_",
+  "luz_racional8",
+  "irregardless567",
+  "Exterminador_ou",
+  "efifay",
+  "unapersonaentwich",
+  "ElPutoYao",
+  "johnnylussac2",
+  "byronn_love10",
+  "bilico_206",
+  "dachs_lachs",
+  "adrianovand",
+  "supratim30",
+  "cheetahboy615_ytpurrs",
+  "jkyt10",
+  "AustinGray69",
+  "dbztrunksfan",
+  "ww5_umaga",
+  "inakiip",
+  "diego_storm_pegasus",
+  "madnessgmd",
+  "SergioxxM",
+  "ivanovich_12",
+  "skysttv",
+  "kira_klinha",
+  "monitagamer",
+  "alliasxp",
+  "jafeone",
+  "La_Submarinaa",
+  "alba_guiju",
+  "WillG_G",
+  "MatrakaJM",
+  "osii_9",
+  "Rockyfer",
+  "anonymous_wize",
+  "PanchitaCanastera",
+  "emeuve7",
+  "xTw1steed",
+  "inakiverin",
+  "JorelMazouz",
+  "ferdinand2403",
+  "natsuc0w",
+  "hc_jxxu",
+  "tatoveiga",
+  "sento_em_rolas_",
+  "tatoveiga_",
+  "WafflesConSirope"
+];
+const GANADOR_FIJO = 'Rockyfer';
+const DURACION_MS = 60000;
+const $ = id => document.getElementById(id);
+const TAU = Math.PI * 2;
+const modulo = (a, n) => ((a % n) + n) % n;
+const clock = sec => { const s = Math.max(0, Math.ceil(sec)); return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };
+const canvas = $('wheelCanvas');
+const ctx = canvas.getContext('2d');
+const N = PARTICIPANTES.length;
+const winnerIndex = PARTICIPANTES.indexOf(GANADOR_FIJO);
+let rotation = 0;
+let spinning = false;
+let lastIndex = -1;
+if (N !== 138 || winnerIndex < 0) throw new Error('Comprueba los nombres fijos y Rockyfer en el archivo.');
+function currentIndex() { return modulo(Math.round(-rotation / (TAU / N)), N); }
+function updateCurrentName() {
+  const i = currentIndex();
+  if (i === lastIndex) return;
+  lastIndex = i;
+  $('activeName').textContent = PARTICIPANTES[i];
+  $('featuredName').textContent = PARTICIPANTES[i];
+  document.querySelectorAll('.participant.active').forEach(el => el.classList.remove('active'));
+  const active = $('person-' + i);
+  if (active) active.classList.add('active');
+}
+function updateRotation() {
+  canvas.style.transform = `rotate(${rotation}rad)`;
+  updateCurrentName();
+}
+function drawWheel() {
+  const {width: w, height: h} = canvas;
+  const r = 537, step = TAU / N;
+  ctx.clearRect(0, 0, w, h);
+  ctx.save(); ctx.translate(w / 2, h / 2);
+  const palette = ['#ee75b2','#7454b4','#e8a26d','#39366f','#d355ae','#655cb0','#ff95bd','#4d456f'];
+  for (let i=0; i<N; i++) {
+    const start = -Math.PI / 2 + (i-.5)*step;
+    ctx.beginPath(); ctx.moveTo(0,0); ctx.arc(0,0,r,start,start+step); ctx.closePath();
+    ctx.fillStyle = palette[i % palette.length]; ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,.33)'; ctx.lineWidth = 1; ctx.stroke();
+    const angle = -Math.PI / 2 + i*step;
+    ctx.save(); ctx.rotate(angle);
+    const left = Math.cos(angle) < 0;
+    if (left) {ctx.rotate(Math.PI); ctx.textAlign = 'left';}
+    else {ctx.textAlign = 'right';}
+    ctx.textBaseline='middle'; ctx.fillStyle='#fff'; ctx.font='700 14px Arial, sans-serif';
+    ctx.shadowColor='#190b31'; ctx.shadowBlur=2.5;
+    // Los nombres se dibujan sin el número original y sin truncarlos.
+    ctx.fillText(PARTICIPANTES[i], left ? -(r-20) : r-20, 0, 330);
+    ctx.restore();
+  }
+  ctx.beginPath(); ctx.arc(0,0,r-3,0,TAU); ctx.lineWidth=7; ctx.strokeStyle='#ffb9da'; ctx.stroke();
+  ctx.beginPath(); ctx.arc(0,0,113,0,TAU); ctx.fillStyle='#24153a'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0,0,116,0,TAU); ctx.strokeStyle='#fff5ef88'; ctx.lineWidth=2; ctx.stroke();
+  ctx.restore(); updateRotation();
+}
+function showNames() {
+  const frag = document.createDocumentFragment();
+  PARTICIPANTES.forEach((name, i) => {
+    const div = document.createElement('div');
+    div.className='participant'; div.id='person-'+i;
+    const span=document.createElement('span'); span.className='name'; span.textContent=name;
+    div.appendChild(span); frag.appendChild(div);
+  });
+  $('participantsGrid').replaceChildren(frag);
+  lastIndex=-1; updateCurrentName();
+}
+function spin() {
+  if (spinning) return;
+  $('winnerModal').classList.remove('show');
+  $('winnerModal').setAttribute('aria-hidden', 'true');
+  const step = TAU/N;
+  // 1 vuelta completa + el ángulo exacto necesario para dejar Rockyfer en el puntero.
+  const targetAngle = modulo(-winnerIndex*step, TAU);
+  const delta = modulo(targetAngle - modulo(rotation, TAU), TAU);
+  const from = rotation, to = rotation + TAU + delta;
+  const start = performance.now();
+  spinning=true;
+  $('spinBtn').disabled=true;
+  $('spinBtn').textContent='✦ LA RULETA ESTÁ GIRANDO…';
+  $('statusText').textContent='El giro está en marcha. Sigue los nombres en el marcador.';
+  $('progressFill').style.width='0%';
+  function tick(now) {
+    const t = Math.min(1, Math.max(0,(now-start)/DURACION_MS));
+    const ease = t*t*(3-2*t);
+    rotation = from + (to-from)*ease;
+    updateRotation();
+    $('elapsed').textContent = clock((DURACION_MS-(now-start))/1000);
+    $('progressFill').style.width = (t*100).toFixed(2)+'%';
+    if (t < 1) requestAnimationFrame(tick);
+    else {
+      rotation=to; updateRotation(); spinning=false;
+      $('spinBtn').disabled=false;
+      $('spinBtn').textContent='✦ GIRAR LA RULETA';
+      $('elapsed').textContent='00:00';
+      $('statusText').textContent='Giro terminado. Puedes volver a girar las veces que quieras.';
+      showWinner();
+    }
+  }
+  requestAnimationFrame(tick);
+}
+function showWinner() {
+  $('winnerName').textContent=GANADOR_FIJO;
+  $('winnerModal').classList.add('show');
+  $('winnerModal').setAttribute('aria-hidden','false');
+  createConfetti();
+}
+function createConfetti() {
+  const confetti=$('confetti'), c=confetti.getContext('2d');
+  const dpr=Math.min(devicePixelRatio || 1,2);
+  confetti.width=Math.round(innerWidth*dpr); confetti.height=Math.round(innerHeight*dpr);
+  confetti.style.width=innerWidth+'px'; confetti.style.height=innerHeight+'px';
+  c.scale(dpr,dpr);
+  const colors=['#ff80bf','#ffe3a0','#8d7aff','#8bf1f1','#ffffff'];
+  const particles=Array.from({length:145},()=>({x:Math.random()*innerWidth,y:-Math.random()*innerHeight,vy:1.6+Math.random()*3.5,vx:(Math.random()-.5)*1.6,a:Math.random()*TAU,size:3+Math.random()*7,color:colors[Math.floor(Math.random()*colors.length)]}));
+  let frames=0;
+  function animate(){
+    if (!$('winnerModal').classList.contains('show')){c.clearRect(0,0,innerWidth,innerHeight);return;}
+    c.clearRect(0,0,innerWidth,innerHeight);
+    particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.a+=.05;c.save();c.translate(p.x,p.y);c.rotate(p.a);c.fillStyle=p.color;c.fillRect(-p.size/2,-p.size/2,p.size,p.size*.56);c.restore();});
+    if (++frames < 480) requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+function closeWinner() {
+  $('winnerModal').classList.remove('show');
+  $('winnerModal').setAttribute('aria-hidden','true');
+  $('elapsed').textContent='01:00';
+  $('progressFill').style.width='0%';
+}
+$('spinBtn').addEventListener('click', spin);
+$('winnerModal').addEventListener('click', closeWinner);
+document.addEventListener('keydown', e=>{if (e.key === 'Escape') closeWinner();});
+drawWheel(); showNames();
+</script>
+</body>
+</html>
